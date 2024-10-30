@@ -1,8 +1,8 @@
 function getComputerChoice() {
     let randNum = Math.random();
-    if (randNum < 1/3 ) {
+    if (randNum < 1 / 3) {
         return "rock";
-    } else if (randNum < 2/3 ) {
+    } else if (randNum < 2 / 3) {
         return "paper";
     } else {
         return "scissors";
@@ -18,7 +18,7 @@ function getHumanChoice() {
             case "scissors":
                 return humanChoice.toLowerCase().trim();
             default:
-                humanChoice = prompt("Please enter Rock, Paper or Scissors"); 
+                humanChoice = prompt("Please enter Rock, Paper or Scissors");
         }
     }
     console.log("You did not play an object.")
