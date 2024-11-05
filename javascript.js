@@ -1,16 +1,24 @@
 let humanScore = 0;
 let computerScore = 0;
 let roundIter = 0;
-const playground = document.getElementById("playground");
+const defaultBtnColor = "#C4DFE6";
+const selectedBtnColor = "#66A5AD";
+const humanPlay = document.getElementById("human-play");
+const computerPlay = document.getElementById("computer-play");
+const humanScoreDisplay = document.getElementById("human-score")
+const computerScoreDisplay = document.getElementById("computer-score")
 const results = document.getElementById("results");
 
 function getComputerChoice() {
     let randNum = Math.random();
     if (randNum < 1 / 3) {
+        computerPlay.innerHTML = "<h2>&#9994</h2>";
         return "rock";
     } else if (randNum < 2 / 3) {
+        computerPlay.innerHTML = "<h2>&#128400</h2>";
         return "paper";
     } else {
+        computerPlay.innerHTML = "<h2>&#9996</h2>";
         return "scissors";
     }
 }
@@ -27,23 +35,45 @@ function playRound(humanChoice, computerChoice) {
     ) {
         roundResults.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
         humanScore++;
+        humanScoreDisplay.textContent = humanScore;
     } else {
         roundResults.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
         computerScore++;
+        computerScoreDisplay.textContent = computerScore;
     }
 
     results.appendChild(roundResults);
 }
 
-playground.addEventListener("click", (event) => {
+function resetGame() {
+    results.textContent = "";
+    humanScore = 0;
+    computerScore = 0
+    humanScoreDisplay.textContent = 0;
+    computerScoreDisplay.textContent = 0;
+    resetPlayBtnColor();
+}
+
+function resetPlayBtnColor() {
+    document.querySelectorAll(".play-button").forEach((elm) => {
+        elm.style.backgroundColor = defaultBtnColor;
+    })
+}
+
+humanPlay.addEventListener("click", (event) => {
+
     if (roundIter == 0) {
-        results.textContent = "";
+        resetGame();
     }
 
-    results.innerHTML += `<p>Round ${roundIter++}:</p>`;
+    resetPlayBtnColor();
+
+    results.innerHTML += `<p>Round ${++roundIter}:</p>`;
     const humanChoice = event.target.id;
+    event.target.style.backgroundColor = selectedBtnColor;
 
     playRound(humanChoice, getComputerChoice());
+
     if (roundIter == 5){
         const gameResults = document.createElement('p');
 
@@ -55,6 +85,12 @@ playground.addEventListener("click", (event) => {
         }
 
         results.appendChild(gameResults);
+
+        const resetBtn = document.createElement('button');
+        resetBtn.textContent = "Reset";
+        results.appendChild(resetBtn);
+        resetBtn.addEventListener('click', resetGame);
+
         roundIter = 0;
     }
 })

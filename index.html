@@ -4,12 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1> Rock! Paper! Scissors!</h1>
     <div id="playground">
-        <button id="rock">&#9994</button>
-        <button id="paper">&#128400</button>
-        <button id="scissors">&#9996</button>
+        <div id="human-section" class="play-section">
+            <p>Your Pick:</p>
+            <div id="human-play">
+                <button id="rock" class="play-button">&#9994</button>
+                <button id="paper" class="play-button">&#128400</button>
+                <button id="scissors" class="play-button">&#9996</button>
+            </div>
+            <div id="human-score" class="scoreboard">0</div>
+        </div>
+        <div id="computer-section" class="play-section">
+            <p>Computer Play</p>
+            <div id="computer-play"></div>
+            <div id="computer-score" class="scoreboard">0</div>
+        </div>
     </div>
     <div id="results">
     </div>
