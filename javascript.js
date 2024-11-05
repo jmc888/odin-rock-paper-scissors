@@ -8,6 +8,8 @@ const computerPlay = document.getElementById("computer-play");
 const humanScoreDisplay = document.getElementById("human-score")
 const computerScoreDisplay = document.getElementById("computer-score")
 const results = document.getElementById("results");
+const winColor = "#2C5F2D";
+const loseColor = "#CC313D";
 
 function getComputerChoice() {
     let randNum = Math.random();
@@ -79,11 +81,14 @@ humanPlay.addEventListener("click", (event) => {
 
         if (humanScore == computerScore) {
             gameResults.textContent = `Game ended. It's a tie! Your score is ${humanScore} and computer score is ${computerScore}`;
+
         } else {
             let winner = (humanScore > computerScore) ? "You" : "Computer";
+            let winnerColor = (humanScore > computerScore) ? winColor : loseColor;
             gameResults.textContent = `Game ended. ${winner} win! Your score is ${humanScore} and computer score is ${computerScore}`;
+            gameResults.style.color = winnerColor;
         }
-
+        
         results.appendChild(gameResults);
 
         const resetBtn = document.createElement('button');
